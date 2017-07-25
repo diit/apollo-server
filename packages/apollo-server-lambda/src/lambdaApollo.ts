@@ -84,7 +84,7 @@ export interface LambdaGraphiQLOptionsFunction {
 
 export function graphiqlLambda(options: GraphiQL.GraphiQLData | LambdaGraphiQLOptionsFunction) {
   return (event, lambdaContext: lambda.Context, callback: lambda.Callback) => {
-    const query = event.queryStringParameters;
+    const query = event.queryStringParameters || {};
     GraphiQL.resolveGraphiQLString(query, options, event, lambdaContext).then(graphiqlString => {
       callback(
         null,
